@@ -284,7 +284,7 @@ export class ScrollBox extends Container
         {
             const posY = item.y + list.y;
 
-            if (posY + item.height >= -padding && posY <= (this.options.height ?? this._height) + padding)
+            if (posY + item.height >= -padding && posY <= this._height + padding)
             {
                 isVisible = true;
             }
@@ -294,7 +294,7 @@ export class ScrollBox extends Container
         {
             const posX = item.x + list.x;
 
-            if (posX + item.width >= -padding && posX <= (this.options.width ?? this._width) + padding)
+            if (posX + item.width >= -padding && posX <= this._width + padding)
             {
                 isVisible = true;
             }
@@ -548,16 +548,16 @@ export class ScrollBox extends Container
             this.lastHeight = this.listHeight;
         }
 
-        if (this._trackpad && this.borderMask)
+        if (this._trackpad)
         {
             const maxWidth
-                = this.borderMask.width
+                = this._width
                 - (this.list?.width ?? 0)
                 - (this.list?.leftPadding ?? 0)
                 - (this.list?.rightPadding ?? 0);
 
             const maxHeight
-                = this.borderMask.height
+                = this._height
                 - (this.list?.height ?? 0)
                 - (this.list?.topPadding ?? 0)
                 - (this.list?.bottomPadding ?? 0);
@@ -785,6 +785,7 @@ export class ScrollBox extends Container
     override set height(value: number)
     {
         this._height = value;
+        this.options.height = value;
         this._dimensionChanged = true;
         this.resize();
         this.scrollTop();
@@ -799,6 +800,7 @@ export class ScrollBox extends Container
     override set width(value: number)
     {
         this._width = value;
+        this.options.width = value;
         this._dimensionChanged = true;
         this.resize();
         this.scrollTop();
@@ -818,6 +820,8 @@ export class ScrollBox extends Container
 
         this._width = value;
         this._height = height;
+        this.options.width = value;
+        this.options.height = height;
         this._dimensionChanged = true;
         this.resize();
         this.scrollTop();
