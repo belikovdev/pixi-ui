@@ -122,7 +122,7 @@ export class Slider extends SliderBase
         if (!this.dragging) return;
 
         const obj = event.currentTarget as DragObject;
-        const { x } = obj.parent.worldTransform.applyInverse(event.global);
+        const { x } = obj.parent!.worldTransform.applyInverse(event.global);
         const positionRatio = x / (this.bg?.width || 1);
         const rawValue = this.min + (positionRatio * (this.max - this.min));
 
