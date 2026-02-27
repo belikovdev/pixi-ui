@@ -26,8 +26,6 @@ npm-debug.log
 *__temp
 node_modules
 bin/
-lib/
-dist/
 coverage/
 temp
 types
